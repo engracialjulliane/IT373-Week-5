@@ -2,13 +2,15 @@
 {% block title %}Gallery{% endblock %}
 {% load static %}
 {% block content %}
- <h1>Gallery</h1>
- <div style="display:flex;gap:1rem;flex-wrap:wrap;">
- {% for fn in images %}
- <figure>
- <img src="{% static 'img/' %}{{ fn }}" alt="{{ fn }}" width="200">
- <figcaption>{{ fn }}</figcaption>
- </figure>
- {% endfor %}
- </div>
+<section class="card">
+    <h1>Gallery</h1>
+    <div class="gallery">
+        {% for fn in images %}
+        <figure>
+            <img src="{% static 'img/' %}{{ fn }}" alt="{{ fn }}">
+            <figcaption>{{ fn }}</figcaption>
+        </figure>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}
