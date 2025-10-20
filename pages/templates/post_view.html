@@ -1,0 +1,44 @@
+<h1>{{ post.title }}</h1>
+<p>{{ post.body }}</p>
+<p><em>Created on {{ post.created_at }}</em></p>
+
+<hr>
+
+<h3>Comments</h3>
+{% if comments %}
+  {% for comment in comments %}
+<div class="comment">
+    <strong>{{ comment.author }}</strong>
+    <p>{{ comment.text }}</p>
+    <small>{{ comment.created_at }}</small>
+</div>
+  {% endfor %}
+{% else %}
+<p>No comments yet.</p>
+{% endif %}
+
+<hr>
+
+<h3>Add a Comment</h3>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+
+    {% if comment_form.errors %}
+    <div class="errorlist">
+        {{ comment_form.errors }}
+    </div>
+    {% endif %}
+
+    <button type="submit">Post Comment</button>
+</form>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+        {{ message }}
+        </li>
+        {% endfor %}
+</ul>
+{% endif %}
